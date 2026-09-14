@@ -16,7 +16,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV smtp_email=pulkits117@gmail.com
-ENV smtp_password="dtms jubi ijmf khpa"
+ENV smtp_password="dtmsjubiijmfkhpa"
 
 COPY package*.json ./
 RUN npm ci --omit=dev && npm cache clean --force
