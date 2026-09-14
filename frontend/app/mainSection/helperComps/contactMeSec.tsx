@@ -41,7 +41,7 @@ const ContactMeSec = () => {
 
     const transmitt = () => {
         const url = import.meta.env.VITE_API_URL
-
+        console.log('URL: ', url)
         const name = nameRef.current?.value
         const email = emailRef.current?.value
         const mssg = mssgRef.current?.value
@@ -158,7 +158,6 @@ const ContactMeSec = () => {
 
                     {/* Form Input Area */}
                     <form
-                        // onSubmit={(e) => e.preventDefault()}
                         className="lg:col-span-8 p-8 sm:p-12 space-y-10"
                     >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -225,8 +224,7 @@ const ContactMeSec = () => {
 
                         {/* Submit Action */}
                         <div className="pt-4 flex justify-end">
-                            <button onClick={() => transmitt()}
-                                type="submit"
+                            <button onClick={() => transmitt()} type="button"
                                 className="group relative inline-flex items-center gap-4 px-8 py-4 bg-[#1A1A1A] text-[#F5F2EB] font-mono text-xs uppercase tracking-widest hover:bg-[#E27D60] transition-colors duration-300 cursor-pointer"
                             >
                                 <span>Transmit Inquiry</span>
