@@ -54,7 +54,7 @@ const ContactMeSec = () => {
             toast('[ 500 // Please fill all the required values. ]')
             return
         } else {
-            fetch(url, {
+            fetch(`${url}/api/send-inquiry`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
