@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const route = Router();
 
-const smtpEmail = process.env.smtp_email;
-const smtpPassword = process.env.smtp_password;
+const smtpEmail = process.env.SMTP_EMAIL ?? process.env.smtp_email;
+const smtpPassword = process.env.SMTP_PASSWORD ?? process.env.smtp_password;
+const fromAddress = process.env.EMAIL_FROM ?? smtpEmail ?? 'noreply@example.com';
 
 const transporter = smtpEmail && smtpPassword
     ? nodemailer.createTransport({
@@ -27,6 +30,8 @@ const escapeHtml = (value: string) =>
 route.post('/send-inquiry', async (req, res) => {
     const { name, senderEmail, message } = req.body;
 
+    console.log("email: ", smtpEmail, 'pass: ', smtpPassword)
+
     if (!senderEmail || !message) {
         return res.status(400).json({ error: 'Email and message are required fields.' });
     }
@@ -35,8 +40,6 @@ route.post('/send-inquiry', async (req, res) => {
         console.error('Email delivery is not configured. Set SMTP_EMAIL and SMTP_PASSWORD.');
         return res.status(500).json({ success: false, error: 'Email delivery is not configured.' });
     }
-
-    console.log("email sent")
 
     const safeMessage = escapeHtml(String(message));
     const mailOptions = {
