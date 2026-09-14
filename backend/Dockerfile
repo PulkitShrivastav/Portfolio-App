@@ -15,6 +15,8 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV smtp_email=pulkits117@gmail.com
+ENV smtp_password="dtms jubi ijmf khpa"
 
 COPY package*.json ./
 RUN npm ci --omit=dev && npm cache clean --force
