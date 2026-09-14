@@ -12,8 +12,8 @@ services:
       - NODE_ENV=production
       - smtp_email=pulkits117@gmail.com
       - smtp_password="dtms jubi ijmf khpa"
-    networks:
-      - app_network
+    ports:
+      - "5000:5000"
 
   frontend:
     build:
@@ -23,14 +23,7 @@ services:
     restart: unless-stopped
     environment:
       - PORT=${FRONTEND_PORT}
-      - BACKEND_URL=${BACKEND_URL}
     ports:
       - "80:5173"
     depends_on:
       - backend
-    networks:
-      - app_network
-
-networks:
-  app_network:
-    driver: bridge
