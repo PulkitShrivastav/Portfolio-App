@@ -6,16 +6,6 @@ export default defineConfig({
   plugins: [tailwindcss(), reactRouter()],
   resolve: {
     tsconfigPaths: true,
-  },
-  // server: {
-  //   proxy: {
-  //     '/api': {
-  //       target: process.env.BACKEND_URL ?? 'http://localhost:5000', // Your Express backend port
-  //       changeOrigin: true,
-  //       secure: false,
-  //       rewrite: (path) => path.replace(/^\/api/, ''),
-  //     },
-  //   },
-  // }
+  }
 });
 

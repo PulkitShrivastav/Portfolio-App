@@ -8,12 +8,11 @@ COPY ./package.json package-lock.json /app/
 WORKDIR /app
 RUN npm ci --omit=dev
 
-ENV VITE_API_URL=somedomain.com
-
 FROM node:24-alpine AS build-env
 COPY . /app/
 COPY --from=development-dependencies-env /app/node_modules /app/node_modules
 WORKDIR /app
+ENV VITE_API_URL=http://100.118.208.57:5000
 RUN npm run build
 
 FROM node:24-alpine
