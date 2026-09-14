@@ -7,7 +7,6 @@ RUN npm ci
 
 COPY tsconfig*.json ./
 COPY src/ ./src/
-COPY build/ ./build/
 
 RUN npm run build
 
@@ -21,7 +20,6 @@ COPY package*.json ./
 RUN npm ci --omit=dev && npm cache clean --force
 
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/build ./build
 
 EXPOSE 5000
 
