@@ -37,6 +37,8 @@ route.post('/send-inquiry', async (req, res) => {
         return res.status(500).json({ success: false, error: 'Email delivery is not configured.' });
     }
 
+    console.log("email sent")
+
     const safeMessage = escapeHtml(String(message));
     const mailOptions = {
         from: `"Website Inquiry" <${fromAddress}>`,
