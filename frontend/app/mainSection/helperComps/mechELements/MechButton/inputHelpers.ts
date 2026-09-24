@@ -18,6 +18,7 @@ const getRegex = (allowedChars: {
         specialCharRegex = '\\^\\[\\]\\-\\\\~`!@#$%.&*()_+={};:\'"<>?/'
     } else {
         const chars = allowedChars.specialChars as SpecialChars[]
+        console.log(chars)
         let regExp = ''
         const escapedChars = ['^', '[]', '-', '\\']
         chars.forEach(c => {

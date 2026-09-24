@@ -23,8 +23,8 @@ const NavElement = ({ setActive, activeSec, navLabels }: { setActive: (value: st
                 </div>
             </div>
 
-            <nav className="relative mt-4 md:mt-0">
-                <ul className="flex items-center gap-1 sm:gap-2">
+            <nav className="relative mt-4 md:mt-0 w-full lg:w-[50vw]">
+                <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                     {navLabels.map((li, indx) => (
                         <ListElement
                             key={indx}

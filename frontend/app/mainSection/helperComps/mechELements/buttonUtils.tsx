@@ -403,7 +403,7 @@ export const InputTolerances = () => {
                     startValue="alphanumeric"
                 />
                 <Dropdown label="Special Characters" setValue={(val) => {
-                    if (val === 'custom [#,$,&,...] no space') {
+                    if (val === 'custom [#,$,&,...]') {
                         CNTX.setSpecialChars(cleanedVal(specialChars))
                     }
                     else CNTX.setSpecialChars(val)

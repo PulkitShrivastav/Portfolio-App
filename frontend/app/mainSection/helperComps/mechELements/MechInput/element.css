@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+.spinner1 {
+    --color-1: #fff;
+    --size: 0.4px;
+
+    width: 100%;
+    height: 100%;
+
+    border: calc(5 * var(--size)) solid var(--color-1);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner2 {
+    --color-1: #fff;
+    --size: 0.5px;
+
+    width: 100%;
+    height: 100%;
+
+    border: calc(5 * var(--size)) dotted var(--color-1);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.meSelect::selection {
+    background-color: var(--selectBg);
+    color: var(--selectTxt);
+}

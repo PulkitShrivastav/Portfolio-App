@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, type SetStateAction } from "react";
+import React, { createContext, useContext, useRef, useState, type SetStateAction } from "react";
+import type { MechInputRef } from "./MechInput/MechInput";
 
 type ElemCntxType = {
     activeComponent: string
@@ -54,6 +55,32 @@ type ElemCntxType = {
     setTltpAnime: React.Dispatch<SetStateAction<string>>
     buttonAlive: boolean
     setButtonAlive: React.Dispatch<SetStateAction<boolean>>
+    formData: FormData
+    setFormData: React.Dispatch<SetStateAction<FormData>>
+    alphabeticRef: React.RefObject<MechInputRef | null>
+    numericRef: React.RefObject<MechInputRef | null>
+    passStrengthRef: React.RefObject<MechInputRef | null>
+    passNoStrengthRef: React.RefObject<MechInputRef | null>
+    alphanumericRef: React.RefObject<MechInputRef | null>
+    emailUsernameRef: React.RefObject<MechInputRef | null>
+    emailRef: React.RefObject<MechInputRef | null>
+    usernameRef: React.RefObject<MechInputRef | null>
+    confirmPassRef: React.RefObject<MechInputRef | null>
+    customInputRef: React.RefObject<MechInputRef | null>
+    handleFlush: () => void
+}
+
+type FormData = {
+    alphabetic: string
+    numeric: string
+    passwordStrength: string
+    passwordNoStrength: string
+    alphanumeric: string
+    emailOrUsername: string
+    email: string
+    username: string
+    confirmPassword: string
+    custom: string
 }
 
 const Cntx = createContext<ElemCntxType | null>(null)
@@ -96,6 +123,65 @@ export const MechElemCntx = ({ children }: { children: React.ReactNode }) => {
 
     const logEvent = (msg: string) => {
         setTelemetry(`[${new Date().toLocaleTimeString()}] ${msg}`)
+    }
+
+    const [formData, setFormData] = useState<FormData>({
+        alphabetic: "",
+        numeric: "",
+        passwordStrength: "",
+        passwordNoStrength: "",
+        alphanumeric: "",
+        emailOrUsername: "",
+        email: "",
+        username: "",
+        confirmPassword: "",
+        custom: "",
+    });
+
+    const alphabeticRef = useRef<MechInputRef | null>(null);
+    const numericRef = useRef<MechInputRef | null>(null);
+    const passStrengthRef = useRef<MechInputRef | null>(null);
+    const passNoStrengthRef = useRef<MechInputRef | null>(null);
+    const alphanumericRef = useRef<MechInputRef | null>(null);
+    const emailUsernameRef = useRef<MechInputRef | null>(null);
+    const emailRef = useRef<MechInputRef | null>(null);
+    const usernameRef = useRef<MechInputRef | null>(null);
+    const confirmPassRef = useRef<MechInputRef | null>(null);
+    const customInputRef = useRef<MechInputRef | null>(null);
+
+    const handleFlush = () => {
+        setFormData({
+            alphabetic: "",
+            numeric: "",
+            passwordStrength: "",
+            passwordNoStrength: "",
+            alphanumeric: "",
+            emailOrUsername: "",
+            email: "",
+            username: "",
+            confirmPassword: "",
+            custom: "",
+        })
+
+        const refs = [
+            alphabeticRef,
+            numericRef,
+            passStrengthRef,
+            passNoStrengthRef,
+            alphanumericRef,
+            emailUsernameRef,
+            emailRef,
+            usernameRef,
+            confirmPassRef,
+            customInputRef,
+        ];
+
+        refs.forEach((r) => {
+            if (r.current?.target) r.current.target.value = "";
+            r.current?.hideMessage();
+        });
+
+        setTelemetry("STATE_PURGED // REGISTERS_RESET");
     }
 
     const values = {
@@ -151,7 +237,20 @@ export const MechElemCntx = ({ children }: { children: React.ReactNode }) => {
         tltpAnime,
         setTltpAnime,
         buttonAlive,
-        setButtonAlive
+        setButtonAlive,
+        formData,
+        setFormData,
+        alphabeticRef,
+        numericRef,
+        passStrengthRef,
+        passNoStrengthRef,
+        alphanumericRef,
+        emailUsernameRef,
+        emailRef,
+        usernameRef,
+        confirmPassRef,
+        customInputRef,
+        handleFlush
     }
 
     return (

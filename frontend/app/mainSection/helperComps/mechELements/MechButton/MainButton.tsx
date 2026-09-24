@@ -424,6 +424,8 @@ const MainButton = ({ ...props }: Props) => {
         '--selectTxt': 'red'
     }
 
+    const isMobile = () => (window.innerWidth < 764)
+
     return (
         <div className="relative">
 
@@ -466,7 +468,8 @@ const MainButton = ({ ...props }: Props) => {
                 whitespace-nowrap w-fit opacity-0 mt-1 py-1 px-2 cursor-default"
             >{props.disabledMessage}</div> : null}
 
-            {props.enableRemove && !props.disabled ? <div style={floaterCss}
+            {props.enableRemove && !props.disabled && isMobile() ? <div style={floaterCss}
+                className="absolute mb-1 bottom-full right-2 opacity-0 translate-y-[50px]"
                 tabIndex={0}
                 ref={floaterRef}
 
@@ -494,9 +497,7 @@ const MainButton = ({ ...props }: Props) => {
                         animeType: props.animeTypes.onRemove,
                         onComplete: () => props.onRemove?.()
                     })
-                }}
-
-                className="absolute mb-1 bottom-full right-2 opacity-0 outline-none">
+                }}>
                 <TrashIcon />
             </div> : null}
         </div>

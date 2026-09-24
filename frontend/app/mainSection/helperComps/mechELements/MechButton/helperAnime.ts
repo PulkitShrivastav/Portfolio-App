@@ -53,7 +53,7 @@ const floaterHandler = (params: {
     if (params.state === 'appear') gsap.set(params.floaterRef.current, { opacity: 1 })
 
     gsap.to(params.floaterRef.current, {
-        y: params.state === 'appear' ? 0 : 20,
+        y: params.state === 'appear' ? 0 : 50,
         duration: 0.3,
         ease: params.state === 'appear' ? 'power2.out' : 'linear',
         onComplete: () => params.state === 'disappear' ? gsap.set(params.floaterRef.current, { opacity: 0 }) : undefined
