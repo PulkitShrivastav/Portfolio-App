@@ -9,7 +9,7 @@ interface Project {
     summary: string;
     stack: string[];
     metrics: { label: string; value: string }[];
-    liveUrl: string;
+    liveUrl?: string;
     sourceUrl?: string;
 }
 
@@ -26,28 +26,27 @@ const projects: Project[] = [
             { label: "Status", value: "Active v0.4" },
             { label: "Footprint", value: "< 4.2kb Core" },
         ],
-        liveUrl: "https://mechelements.dev",
-        sourceUrl: "https://github.com/example/mechelements",
+        sourceUrl: "https://github.com/PulkitShrivastav/Mech-Elements",
     },
     {
         id: "techanime",
         index: "02",
-        title: "TechAnime IDE",
+        title: "Dev_Anime IDE",
         category: "Developer Tooling",
         summary:
             "Browser-integrated code editor supporting multi-tab Monaco instances for HTML, CSS, and JS execution. Includes local runtime persistence and live frame compilation.",
-        stack: ["Angular", "Monaco Editor", "TypeScript", "RxJS"],
+        stack: ["Angular", "Monaco Editor", "TypeScript", "RxJS", 'Express'],
         metrics: [
             { label: "Latency", value: "Sub-16ms Eval" },
             { label: "Runtime", value: "Client Isolated" },
         ],
-        liveUrl: "https://techanime.dev",
-        sourceUrl: "https://github.com/example/techanime",
+        liveUrl: "https://railroad-offshore-organizer-suggestions.trycloudflare.com/login",
+        sourceUrl: "https://github.com/PulkitShrivastav/dev_anime",
     },
     {
         id: "terminal-core",
         index: "03",
-        title: "Web PTY Terminal",
+        title: "Web PTY Terminal (Ongoing...)",
         category: "System Utility",
         summary:
             "Full-duplex web terminal gateway linking browser clients to underlying containerized shells via WebSocket stream protocols and persistent process spawning.",
@@ -56,7 +55,7 @@ const projects: Project[] = [
             { label: "Architecture", value: "Dual Socket" },
             { label: "Concurrency", value: "Multi-Process" },
         ],
-        liveUrl: "https://terminal.example.com",
+        sourceUrl: "https://github.com/PulkitShrivastav/faber_studio_frontend",
     },
 ];
 
@@ -209,17 +208,19 @@ export default function ProjectsSec() {
                                         Source Code
                                     </a>
                                 )}
-                                <a
-                                    href={activeProject.liveUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group inline-flex items-center gap-3 px-8 py-3.5 bg-[#1A1A1A] text-[#F5F2EB] font-mono text-xs uppercase tracking-widest hover:bg-[#E27D60] transition-colors duration-300"
-                                >
-                                    <span>Launch Tool</span>
-                                    <span className="transform group-hover:translate-x-1 transition-transform duration-300">
-                                        ↗
-                                    </span>
-                                </a>
+                                {activeProject.liveUrl && (
+                                    <a
+                                        href={activeProject.liveUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group inline-flex items-center gap-3 px-8 py-3.5 bg-[#1A1A1A] text-[#F5F2EB] font-mono text-xs uppercase tracking-widest hover:bg-[#E27D60] transition-colors duration-300"
+                                    >
+                                        <span>Launch Tool</span>
+                                        <span className="transform group-hover:translate-x-1 transition-transform duration-300">
+                                            ↗
+                                        </span>
+                                    </a>
+                                )}
                             </div>
                         </div>
 
