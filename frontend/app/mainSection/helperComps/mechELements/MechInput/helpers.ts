@@ -180,7 +180,9 @@ const checkConfirmPassword = (ev: React.ChangeEvent<HTMLInputElement>, minChars:
 const checkEmailOrUsername = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const elem = ev.currentTarget
     const val = elem.value
+    if (val === "") return { type: '', error: false, value: val, message: '' }
     const curEnd = elem.selectionEnd ?? 0
+    const lastChar = val.slice(curEnd - 1, curEnd)
     if (val.includes('@')) {
         const slice_before_at = val.slice(0, val.indexOf('@'))
         if (slice_before_at === "") {
@@ -193,6 +195,9 @@ const checkEmailOrUsername = (ev: React.ChangeEvent<HTMLInputElement>) => {
     } else if (val.includes(' ')) {
         const value = trimLastChar(val, curEnd)
         return { type: 'none', error: true, value, message: 'Whitespaces are not allowed.' }
+    } else if (!/[a-zA-Z0-9.\-]/.test(lastChar)) {
+        const value = trimLastChar(val, curEnd)
+        return { type: '', error: true, value, message: `" ${lastChar} " is not allowed in domain.` }
     } else {
         return { type: 'email', error: false, value: val, message: '' }
     }

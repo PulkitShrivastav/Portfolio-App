@@ -76,7 +76,7 @@ const MechInput = forwardRef<MechInputRef, Props>((props, ref) => {
         backTravel: props.labelAnimeFactors?.backTravel ?? 50,
         type: props.type ?? 'alphanumeric',
         matchValue: props.matchValue ?? '',
-        withStrength: props.withStrength ?? true,
+        withStrength: props.withStrength ?? false,
         placeholder: props.placeholder ?? (props.label ? `Enter ${props.label}` : `<MechInput/>`),
     }
 
@@ -179,8 +179,7 @@ const MechInput = forwardRef<MechInputRef, Props>((props, ref) => {
         })
     }
 
-    const onBlur = (ev: React.FocusEvent<HTMLInputElement>) => {
-
+    const checkFinalState = (ev: React.FocusEvent<HTMLInputElement>) => {
         const elem = ev.currentTarget
         const val = elem.value
         if (val === '') {
@@ -237,6 +236,10 @@ const MechInput = forwardRef<MechInputRef, Props>((props, ref) => {
                 setState('success')
             }
         }
+    }
+
+    const onBlur = (ev: React.FocusEvent<HTMLInputElement>) => {
+        checkFinalState(ev)
         anime.blur({
             inputRef,
             labelRef,
@@ -261,8 +264,6 @@ const MechInput = forwardRef<MechInputRef, Props>((props, ref) => {
         if (chars > params.maxChar) {
             const value = trimLastChar(val, curEnd)
             setTotalChars(value.length)
-            const percent = Math.floor((value.length / params.maxChar) * 100)
-            anime.setMeterScale(percent * 0.01, meterRef)
             elem.value = value
             elem.setSelectionRange(curEnd - 1, curEnd - 1)
         } else if (params.type !== 'password' && params.type !== 'confirm password' && params.type !== 'custom') {
@@ -305,7 +306,7 @@ const MechInput = forwardRef<MechInputRef, Props>((props, ref) => {
             const points = result.points
             const scale = points * 0.2
             let strength = ''
-            let state: 'base' | 'error' | 'warning' | 'success' = 'base'
+            let state: MechInputStates = 'base'
             if (points <= 2) { strength = 'VERY WEAK'; state = 'error' }
             else if (points <= 4) { strength = 'WEAK'; state = 'warning' }
             else if (points === 5) { strength = 'STRONG'; state = 'success' }
@@ -320,6 +321,10 @@ const MechInput = forwardRef<MechInputRef, Props>((props, ref) => {
             const percent = Math.floor((chars / params.maxChar) * 100)
             anime.setMeterScale(percent * 0.01, meterRef)
             setState(result.state)
+        } else if (params.type === 'custom') {
+            setTotalChars(chars)
+            const percent = Math.floor((chars / params.maxChar) * 100)
+            anime.setMeterScale(percent * 0.01, meterRef)
         }
     }
 

@@ -107,15 +107,6 @@ const blur = (params: {
     initialWidth: number
 }) => {
 
-    // gsap.killTweensOf([
-    //     params.inputRef.current,
-    //     params.labelRef.current,
-    //     params.textRef.current,
-    //     params.meterDivRef.current,
-    //     params.passIconRef.current,
-    //     params.charsTelemetryRef.current
-    // ])
-
     const tl = gsap.timeline()
     tl.to(params.charsTelemetryRef.current, {
         scaleY: 0,

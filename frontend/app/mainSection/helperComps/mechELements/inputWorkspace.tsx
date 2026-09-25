@@ -19,8 +19,7 @@ const InputWorkspace = () => {
         paddingX: "0.75rem",
         paddingY: "0.625rem",
         width: "100%",
-        fontFamily:
-            "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+        fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
         fontSize: "15px",
         fontWeight: 500,
         mssgfontSize: "11px",
